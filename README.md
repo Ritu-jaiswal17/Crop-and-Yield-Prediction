@@ -14,5 +14,5 @@ JavaScript Web APIs – For voice input and interaction features.
 
 Pandas & Scikit-learn – For data preprocessing and implementing ML algorithms.
 
-NumPy & Matplotlib – For data handling and visualization (if included).
+
 
