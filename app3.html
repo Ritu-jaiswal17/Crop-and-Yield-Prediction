@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop and Yield Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app3.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Crop and Yield Prediction</h2>
+        <form action="/predict" method="post">
+            <label for="humidity">Humidity:</label>
+            <input type="text" name="humidity" value="{{ form_data.humidity if form_data else '' }}" required><br>
+
+            <label for="temperature">Temperature:</label>
+            <input type="text" name="temperature" value="{{ form_data.temperature if form_data else '' }}" required><br>
+
+            <label for="potassium">Potassium:</label>
+            <input type="text" name="potassium" value="{{ form_data.potassium if form_data else '' }}" required><br>
+
+            <label for="nitrogen">Nitrogen:</label>
+            <input type="text" name="nitrogen" value="{{ form_data.nitrogen if form_data else '' }}" required><br>
+
+            <label for="phosphorus">Phosphorus:</label>
+            <input type="text" name="phosphorus" value="{{ form_data.phosphorus if form_data else '' }}" required><br>
+
+            <label for="ph">pH:</label>
+            <input type="text" name="ph" value="{{ form_data.ph if form_data else '' }}" required><br>
+
+            <label for="rainfall">Rainfall:</label>
+            <input type="text" name="rainfall" value="{{ form_data.rainfall if form_data else '' }}" required><br>
+
+            <label for="soil_type">Soil Type:</label>
+            <select name="soil_type" required>
+                <option value="">Select Soil Type</option>
+                <option value="sandy" {% if form_data.soil_type == 'sandy' %}selected{% endif %}>Sandy</option>
+                <option value="clayey" {% if form_data.soil_type == 'clayey' %}selected{% endif %}>Clayey</option>
+                <option value="loamy" {% if form_data.soil_type == 'loamy' %}selected{% endif %}>Loamy</option>
+                <option value="silty" {% if form_data.soil_type == 'silty' %}selected{% endif %}>Silty</option>
+                <option value="peaty" {% if form_data.soil_type == 'peaty' %}selected{% endif %}>Peaty</option>
+                <option value="saline" {% if form_data.soil_type == 'saline' %}selected{% endif %}>Saline</option>
+                <option value="laterite" {% if form_data.soil_type == 'laterite' %}selected{% endif %}>Laterite</option>
+            </select><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if crop %}
+            <div class="result">
+                <h3>Predicted Crop: {{ crop }}</h3>
+                <h3>Estimated Yield: {{ yield_pred }} tons</h3>
+                
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <h3 style="color:red;">Error: {{ error }}</h3>
+            
+        {% endif %}
+     </div>
+</body>
+</html>
